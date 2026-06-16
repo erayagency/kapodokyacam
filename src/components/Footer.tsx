@@ -56,7 +56,7 @@ export default function Footer() {
                 {siteConfig.address}
               </p>
               <p className="mt-4 text-sm opacity-75">
-                <span>Web Tasarım: Click to Peak</span>
+                <a href="https://maviona.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Web Tasarım: Maviona</a>
               </p>
             </div>
           </div>
