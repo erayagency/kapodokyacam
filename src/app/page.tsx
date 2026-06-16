@@ -1,65 +1,147 @@
-import Image from "next/image";
+import Link from "next/link";
+import { services, blogPosts, videos, siteConfig } from "@/lib/data";
+import { ServiceCard } from "@/components/ServiceCard";
+import { BlogCard } from "@/components/BlogCard";
+import { VideoCard } from "@/components/VideoCard";
+import SwiperClient from "@/components/SwiperClient";
 
 export default function Home() {
+  const toplamaAyirmaServices = services.filter((s) => s.category === "toplama-ayirma");
+  const geriKazanimServices = services.filter((s) => s.category === "geri-kazanim");
+  const sliderServices = services.filter(
+    (s) =>
+      s.slug === "imha-ve-tasfiye-edilecek-urunler" ||
+      s.slug === "organik-ve-anorganik-atiklar"
+  );
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <section className="bg-white">
+        <div className="swiper slider-owl-1 relative">
+          <div className="relative">
+            <Link href="/iletisim">
+              <img
+                src="/yuklemeler/slayt/geridonusum.jpg"
+                alt="Geri Dönüşüm"
+                className="w-full"
+              />
+              <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[700px] text-dark text-lg text-center">
+                Türkiye Cumhuriyeti Gümrük Müdürlüklerinin depo ve antrepo hizmeti veren kuruluşların raf ömrü sınırlı veya tarihi geçmiş
+                dış ambalajı hatalı olan tüketime ve işlemeye uygun olmayan ürünlerin imha ve geri kazanım işlemlerini gerçekleştirmekteyiz.
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-[70px] md:py-[70px] py-8">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="md:w-1/2">
+              <div className="text-center md:text-left">
+                <h2 className="text-[25px] font-semibold text-dark mb-5">Hakkımızda</h2>
+                <div className="font-light mb-5">
+                  <p>Türkiye Cumhuriyeti gümrük müdürlüklerinin, depo ve antrepo hizmeti veren kuruluşlarının, raf ömrü sınırlı tarihi geçmiş, dış ambalajı hatalı olup ta piyasaya sürülmeden uzun süreli bekleyen ürünlerinin imhasını yapmaktayız.</p>
+                  <p className="mt-4">Aynı zamanda çeşitli sektörlerde hizmet veren uluslararası markaların (Versace, Chanel, Pernod Ricard, Adidas, New Balance... vs.), piyasaya sürülmeden yakalanan sahte ürünlerinin imhasını da yapmaktayız.</p>
+                </div>
+                <div>
+                  <Link href="/hakkimizda" className="btn-gold">
+                    Devamını Oku
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="md:w-1/2">
+              <img src="/yuklemeler/gorsel/green.png" alt="Kapadokya Cam" className="w-full" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-[70px] bg-[#f7f7f7]">
+        <div className="container mx-auto px-4">
+          <h2 className="section-title">Toplama Ayırma Lisansı İle Yaptıklarımız</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {toplamaAyirmaServices.map((service) => (
+              <ServiceCard key={service.slug} service={service} />
+            ))}
+          </div>
+
+          <h2 className="section-title mt-8">Tehlikesiz Atık Geri Kazanım Lisansı İle Yaptıklarımız</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {geriKazanimServices.map((service) => (
+              <ServiceCard key={service.slug} service={service} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="py-20 text-center text-white bg-cover bg-fixed bg-center"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(49,46,46,0.65),rgba(9,20,12,0.51)), url(/images/cta-bg.png)",
+        }}
+      >
+        <div className="container mx-auto px-4">
+          <h2 className="text-[28px] font-bold mb-8">Şirketimizin Lisans Belgeleri</h2>
+          <p className="mb-8">
+            Profesyonel bir biçimde hizmetlerini sürdüren tesisimiz aynı zamanda gerekli lisanslama süreçlerinden de başarıyla geçti.
           </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            {siteConfig.pdfs.map((pdf, i) => (
+              <a key={i} href={pdf.url} className="btn-gold" target="_blank" rel="noopener noreferrer">
+                {pdf.label} <i className="fa-solid fa-file-pdf ml-2"></i>
+              </a>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </section>
+
+      <section className="py-[70px]">
+        <div className="container mx-auto px-4">
+          <h2 className="section-title">Blog Yazıları</h2>
+          <SwiperClient
+            className="blog-slider"
+            slidesPerView={1}
+            breakpoints={{
+              640: { slidesPerView: 2, spaceBetween: 20 },
+              1024: { slidesPerView: 3, spaceBetween: 30 },
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            {blogPosts.map((post) => (
+              <BlogCard key={post.slug} post={post} />
+            ))}
+          </SwiperClient>
+          <div className="text-center mt-8">
+            <Link href="/blog" className="btn-gold">
+              Tüm Blog Yazıları
+            </Link>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="py-[70px] bg-[#efefef]">
+        <div className="container mx-auto px-4">
+          <SwiperClient
+            className="video-slider"
+            slidesPerView={1}
+            breakpoints={{
+              640: { slidesPerView: 2, spaceBetween: 20 },
+              1024: { slidesPerView: 4, spaceBetween: 20 },
+            }}
+          >
+            {videos.map((video, i) => (
+              <VideoCard key={i} video={video} />
+            ))}
+          </SwiperClient>
+          <div className="text-center mt-8">
+            <Link href="/videolar" className="btn-gold">
+              Tüm Videolar
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
