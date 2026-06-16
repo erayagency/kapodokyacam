@@ -7,6 +7,7 @@ import { BlogCard } from "@/components/BlogCard";
 export const metadata: Metadata = {
   title: "Blog",
   description: "Kapadokya Cam blog yazıları - Geri dönüşüm, çevre ve atık yönetimi hakkında bilgilendirici yazılar.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function Blog() {
@@ -18,6 +19,19 @@ export default function Blog() {
           { label: "Ana Sayfa", href: "/" },
           { label: "Blog" },
         ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Kapadokya Cam", item: "https://www.kapadokyacam.com.tr" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.kapadokyacam.com.tr/blog" },
+            ],
+          }),
+        }}
       />
       <ScrollReveal>
         <section className="py-[70px]">

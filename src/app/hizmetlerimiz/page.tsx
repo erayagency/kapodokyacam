@@ -7,6 +7,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 export const metadata: Metadata = {
   title: "Hizmetlerimiz",
   description: "Kapadokya Cam geri dönüşüm hizmetleri - Toplama ayırma ve tehlikesiz atık geri kazanım.",
+  alternates: { canonical: "/hizmetlerimiz" },
 };
 
 export default function Hizmetlerimiz() {
@@ -18,6 +19,19 @@ export default function Hizmetlerimiz() {
           { label: "Ana Sayfa", href: "/" },
           { label: "Hizmetlerimiz" },
         ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Kapadokya Cam", item: "https://www.kapadokyacam.com.tr" },
+              { "@type": "ListItem", position: 2, name: "Hizmetlerimiz", item: "https://www.kapadokyacam.com.tr/hizmetlerimiz" },
+            ],
+          }),
+        }}
       />
       <ScrollReveal>
         <section className="py-[70px]">

@@ -11,7 +11,15 @@ export const metadata: Metadata = {
   },
   description:
     "Kapadokya Cam Geri Dönüşüm ve İnşaat Sanayi Limited Şirketi - Tehlikesiz atık toplama ayırma ve geri kazanım hizmetleri.",
+  metadataBase: new URL("https://www.kapadokyacam.com.tr"),
+  alternates: {
+    canonical: "/",
+  },
   icons: { icon: "/yuklemeler/imaj/logo-1.png" },
+  other: {
+    "google-site-verification": "whx99T7FkuTLo5I0mlmudvwtds24PNaZVXUxDkZWCtM",
+    "content-language": "tr",
+  },
 };
 
 export default function RootLayout({
@@ -26,6 +34,7 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
+        <script src="https://www.google.com/recaptcha/api.js?hl=tr" async defer></script>
       </head>
       <body>
         <Header />

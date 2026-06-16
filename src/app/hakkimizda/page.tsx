@@ -6,6 +6,7 @@ import { aboutContent } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Hakkımızda",
   description: "Kapadokya Cam hakkında detaylı bilgi, geri dönüşüm nedir, çevre politikamız.",
+  alternates: { canonical: "/hakkimizda" },
 };
 
 export default function Hakkimizda() {
@@ -17,6 +18,19 @@ export default function Hakkimizda() {
           { label: "Ana Sayfa", href: "/" },
           { label: "Hakkımızda" },
         ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Kapadokya Cam", item: "https://www.kapadokyacam.com.tr" },
+              { "@type": "ListItem", position: 2, name: "Hakkımızda", item: "https://www.kapadokyacam.com.tr/hakkimizda" },
+            ],
+          }),
+        }}
       />
       <ScrollReveal>
         <section className="py-[70px]">

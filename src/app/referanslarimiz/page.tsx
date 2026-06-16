@@ -6,6 +6,7 @@ import { references } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Referanslarımız",
   description: "Kapadokya Cam referansları - Birlikte çalıştığımız kurum ve kuruluşlar.",
+  alternates: { canonical: "/referanslarimiz" },
 };
 
 export default function Referanslarimiz() {
@@ -17,6 +18,19 @@ export default function Referanslarimiz() {
           { label: "Ana Sayfa", href: "/" },
           { label: "Referanslarımız" },
         ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Kapadokya Cam", item: "https://www.kapadokyacam.com.tr" },
+              { "@type": "ListItem", position: 2, name: "Referanslarımız", item: "https://www.kapadokyacam.com.tr/referanslarimiz" },
+            ],
+          }),
+        }}
       />
       <ScrollReveal>
         <section className="py-[70px]">

@@ -6,6 +6,7 @@ import { videos } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Videolar",
   description: "Kapadokya Cam videoları - Geri dönüşüm çalışmalarımızdan videolar.",
+  alternates: { canonical: "/videolar" },
 };
 
 export default function Videolar() {
@@ -17,6 +18,19 @@ export default function Videolar() {
           { label: "Ana Sayfa", href: "/" },
           { label: "Videolar" },
         ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Kapadokya Cam", item: "https://www.kapadokyacam.com.tr" },
+              { "@type": "ListItem", position: 2, name: "Videolar", item: "https://www.kapadokyacam.com.tr/videolar" },
+            ],
+          }),
+        }}
       />
       <ScrollReveal>
         <section className="py-[70px] bg-[#efefef]">

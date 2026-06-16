@@ -6,6 +6,7 @@ import { siteConfig } from "@/lib/data";
 export const metadata: Metadata = {
   title: "İletişim",
   description: "Kapadokya Cam iletişim bilgileri - Telefon, e-posta ve adres bilgilerimiz.",
+  alternates: { canonical: "/iletisim" },
 };
 
 export default function Iletisim() {
@@ -17,6 +18,19 @@ export default function Iletisim() {
           { label: "Ana Sayfa", href: "/" },
           { label: "İletişim" },
         ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Kapadokya Cam", item: "https://www.kapadokyacam.com.tr" },
+              { "@type": "ListItem", position: 2, name: "İletişim", item: "https://www.kapadokyacam.com.tr/iletisim" },
+            ],
+          }),
+        }}
       />
       <ScrollReveal>
         <section className="pt-[70px]">
@@ -32,40 +46,22 @@ export default function Iletisim() {
                   <div className="text-[#666] text-xl font-medium">{siteConfig.fullName}</div>
                 </div>
 
-                <div className="flex items-center mb-4">
-                  <div className="text-3xl text-gold min-w-[50px] text-center">
-                    <i className="fas fa-phone-square"></i>
+                {[
+                  { icon: "fas fa-phone-square", value: siteConfig.phone1, href: `tel:${siteConfig.phone1Raw}` },
+                  { icon: "fas fa-phone-square", value: siteConfig.phone2, href: `tel:${siteConfig.phone2Raw}` },
+                  { icon: "fas fa-envelope", value: siteConfig.email1, href: `mailto:${siteConfig.email1}` },
+                  { icon: "fas fa-envelope", value: siteConfig.email2, href: `mailto:${siteConfig.email2}` },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center mb-4">
+                    <div className="text-3xl text-gold min-w-[50px] text-center">
+                      <i className={item.icon}></i>
+                    </div>
+                    <div className="text-[#666] text-xl font-medium">
+                      <a href={item.href} className="text-[#666] hover:text-dark transition-colors">{item.value}</a>
+                    </div>
                   </div>
-                  <div className="text-[#666] text-xl font-medium">
-                    <a href={`tel:${siteConfig.phone1Raw}`} className="text-[#666] hover:text-dark transition-colors">{siteConfig.phone1}</a>
-                  </div>
-                </div>
+                ))}
 
-                <div className="flex items-center mb-4">
-                  <div className="text-3xl text-gold min-w-[50px] text-center">
-                    <i className="fas fa-phone-square"></i>
-                  </div>
-                  <div className="text-[#666] text-xl font-medium">
-                    <a href={`tel:${siteConfig.phone2Raw}`} className="text-[#666] hover:text-dark transition-colors">{siteConfig.phone2}</a>
-                  </div>
-                </div>
-
-                <div className="flex items-center mb-4">
-                  <div className="text-3xl text-gold min-w-[50px] text-center">
-                    <i className="fas fa-envelope"></i>
-                  </div>
-                  <div className="text-[#666] text-xl font-medium">
-                    <a href={`mailto:${siteConfig.email1}`} className="text-[#666] hover:text-dark transition-colors">{siteConfig.email1}</a>
-                  </div>
-                </div>
-                <div className="flex items-center mb-4">
-                  <div className="text-3xl text-gold min-w-[50px] text-center">
-                    <i className="fas fa-envelope"></i>
-                  </div>
-                  <div className="text-[#666] text-xl font-medium">
-                    <a href={`mailto:${siteConfig.email2}`} className="text-[#666] hover:text-dark transition-colors">{siteConfig.email2}</a>
-                  </div>
-                </div>
                 <div className="flex items-center mb-4">
                   <div className="text-3xl text-gold min-w-[50px] text-center">
                     <i className="fas fa-map-marked-alt"></i>
@@ -77,10 +73,18 @@ export default function Iletisim() {
               <div className="md:w-1/2">
                 <h2 className="text-[25px] font-semibold text-dark mb-5">İletişim Formu</h2>
                 <form action={siteConfig.formAction} method="POST">
+                  <input type="hidden" name="page_url" value="https://www.kapadokyacam.com.tr/iletisim" />
+                  <input type="hidden" name="page_title" value="İletişim" />
+                  <input type="text" name="my_name" value="" style={{ display: "none" }} readOnly />
+                  <input type="text" name="timestamp" value={String(Math.floor(Date.now() / 1000))} readOnly style={{ display: "none" }} />
+
                   <input type="text" name="name" className="w-full bg-[#f7f7f7] rounded-md border-none h-[50px] mb-4 px-3 outline-none focus:ring-2 focus:ring-gold/30 transition-shadow" placeholder="Ad Soyad veya Firma Adınız" required />
                   <input type="email" name="email" className="w-full bg-[#f7f7f7] rounded-md border-none h-[50px] mb-4 px-3 outline-none focus:ring-2 focus:ring-gold/30 transition-shadow" placeholder="E-posta Adresiniz" required />
                   <input type="tel" name="phone" className="w-full bg-[#f7f7f7] rounded-md border-none h-[50px] mb-4 px-3 outline-none focus:ring-2 focus:ring-gold/30 transition-shadow" placeholder="Telefon Numaranız" required />
                   <textarea name="message" className="w-full bg-[#f7f7f7] rounded-md border-none h-[160px] mb-4 p-3 outline-none resize-none focus:ring-2 focus:ring-gold/30 transition-shadow" placeholder="Mesajınız" required></textarea>
+
+                  <div className="g-recaptcha mb-4" data-sitekey={siteConfig.reCaptchaSiteKey}></div>
+
                   <button type="submit" className="bg-gold rounded-md text-white border-none py-2.5 px-[50px] font-bold text-lg hover:bg-dark transition-colors cursor-pointer">Gönder</button>
                 </form>
               </div>
