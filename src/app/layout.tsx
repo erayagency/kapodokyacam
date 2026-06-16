@@ -15,10 +15,35 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  icons: { icon: "/yuklemeler/imaj/logo-1.png" },
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+  },
+  openGraph: {
+    title: "Kapadokya Cam | Geri Dönüşüm ve Atık Yönetimi",
+    description:
+      "Kapadokya Cam Geri Dönüşüm ve İnşaat Sanayi Limited Şirketi - Tehlikesiz atık toplama ayırma ve geri kazanım hizmetleri.",
+    url: "https://www.kapadokyacam.com.tr",
+    siteName: "Kapadokya Cam",
+    images: [
+      {
+        url: "/yuklemeler/imaj/logo-1.png",
+        width: 300,
+        height: 100,
+        alt: "Kapadokya Cam",
+      },
+    ],
+    locale: "tr_TR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kapadokya Cam | Geri Dönüşüm ve Atık Yönetimi",
+    description:
+      "Kapadokya Cam Geri Dönüşüm ve İnşaat Sanayi Limited Şirketi - Tehlikesiz atık toplama ayırma ve geri kazanım hizmetleri.",
+  },
   other: {
     "google-site-verification": "whx99T7FkuTLo5I0mlmudvwtds24PNaZVXUxDkZWCtM",
-    "content-language": "tr",
   },
 };
 

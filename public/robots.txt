@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.kapadokyacam.com.tr/sitemap.xml
