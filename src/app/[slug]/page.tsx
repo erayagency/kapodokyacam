@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
+import ScrollReveal from "@/components/ScrollReveal";
 import { services, blogPosts } from "@/lib/data";
 
 interface Props {
@@ -41,83 +42,118 @@ export default async function ContentPage({ params }: Props) {
     { label: page.title },
   ];
 
-  const detailImage = isService
-    ? page.image.replace("/default/", "/")
-    : page.image.replace("/default/", "/");
+  const detailImage = page.image.replace("/default/", "/");
+
+  const breadcrumbLD = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems.map((item, i) => ({
+      "@type": "ListItem" as const,
+      position: i + 1,
+      name: item.label,
+      item: item.href ? `https://www.kapadokyacam.com.tr${item.href}` : undefined,
+    })),
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}
+      />
+
       <Breadcrumb title={page.title} items={breadcrumbItems} />
 
       {isService ? (
-        <section className="py-[70px]">
-          <div className="container mx-auto px-4">
-            <div className="mb-8">
-              <img src={detailImage} alt={page.title} className="float-right max-w-[400px] ml-4 mb-4" />
-            </div>
-            <div
-              className="prose max-w-none [&_p]:mb-4 [&_li]:list-disc [&_li]:ml-10 [&_li]:mb-2"
-              dangerouslySetInnerHTML={{ __html: page.content }}
-            />
+        <ScrollReveal>
+          <section className="py-[70px]">
+            <div className="container mx-auto px-4">
+              <div className="mb-8">
+                <img
+                  src={detailImage}
+                  alt={page.title}
+                  className="float-right max-w-[400px] w-full ml-0 md:ml-6 mb-6 rounded shadow-md"
+                  loading="lazy"
+                />
+              </div>
+              <div
+                className="prose max-w-none [&_p]:mb-4 [&_p]:leading-relaxed [&_li]:list-disc [&_li]:ml-10 [&_li]:mb-2 [&_strong]:text-dark"
+                dangerouslySetInnerHTML={{ __html: page.content }}
+              />
 
-            <div className="mt-12">
-              <h2 className="section-title">Diğer Hizmetlerimiz</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {services
-                  .filter((s) => s.slug !== slug)
-                  .sort(() => Math.random() - 0.5)
-                  .slice(0, 12)
-                  .map((s) => (
-                    <Link key={s.slug} href={`/${s.slug}`} className="block">
-                      <div className="p-2.5 bg-white rounded-md shadow-md mb-4 hover:scale-[1.03] transition-transform">
-                        <div className="text-center mb-4">
-                          <img src={s.image} alt={s.title} className="mx-auto min-h-[166px] object-cover" />
-                        </div>
-                        <div className="text-center font-semibold text-dark">{s.title}</div>
-                      </div>
-                    </Link>
-                  ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : (
-        <section className="py-[70px]">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="md:w-2/3">
-                <img src={detailImage} alt={page.title} className="max-w-full mb-4" />
-                <p className="text-lg">{page.title}</p>
-              </div>
-              <div className="md:w-1/3">
-                <div className="shadow-md rounded-md">
-                  <div className="text-center text-xl font-semibold p-2.5 text-dark border-b border-gold mb-5">
-                    Diğer Blog Yazı
-                  </div>
-                  {blogPosts
-                    .filter((b) => b.slug !== slug)
-                    .map((b) => (
-                      <div key={b.slug} className="mb-8 px-4">
-                        <div className="relative w-full overflow-hidden group">
-                          <div className="absolute left-0 bottom-0 z-[1] w-full p-5 bg-[rgba(196,154,108,0.77)] top-[62%] group-hover:top-0 group-hover:p-10 transition-all duration-300">
-                            <Link href={`/${b.slug}`}>
-                              <div className="text-white text-lg font-semibold h-[70px] line-clamp-3">{b.title}</div>
-                            </Link>
-                            <div className="mt-4 text-center">
-                              <Link href={`/${b.slug}`} className="btn-dark">
-                                Yazıyı Oku
-                              </Link>
-                            </div>
+              <div className="mt-16 clear-both">
+                <h2 className="section-title">Diğer Hizmetlerimiz</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {services
+                    .filter((s) => s.slug !== slug)
+                    .slice(0, 12)
+                    .map((s) => (
+                      <Link key={s.slug} href={`/${s.slug}`} className="block group">
+                        <div className="p-2.5 bg-white rounded-md shadow-md mb-4 group-hover:shadow-lg group-hover:scale-[1.03] transition-all duration-300">
+                          <div className="text-center mb-4 overflow-hidden rounded">
+                            <img
+                              src={s.image}
+                              alt={s.title}
+                              className="mx-auto w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
+                              loading="lazy"
+                            />
                           </div>
-                          <img src={b.image} alt={b.title} className="w-full" />
+                          <div className="text-center font-semibold text-dark group-hover:text-gold transition-colors">{s.title}</div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </ScrollReveal>
+      ) : (
+        <ScrollReveal>
+          <section className="py-[70px]">
+            <div className="container mx-auto px-4">
+              <div className="flex flex-col md:flex-row gap-8">
+                <div className="md:w-2/3">
+                  <img src={detailImage} alt={page.title} className="max-w-full mb-6 rounded shadow-md" loading="lazy" />
+                  <div className="prose max-w-none">
+                    <p className="text-lg leading-relaxed">{page.title}</p>
+                    {page.content && (
+                      <div
+                        className="[&_p]:mb-4 [&_p]:leading-relaxed [&_li]:list-disc [&_li]:ml-10 [&_li]:mb-2 [&_strong]:text-dark"
+                        dangerouslySetInnerHTML={{ __html: page.content }}
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="md:w-1/3">
+                  <div className="shadow-md rounded-md sticky top-24">
+                    <div className="text-center text-xl font-semibold p-2.5 text-dark border-b-2 border-gold mb-5">
+                      Diğer Blog Yazıları
+                    </div>
+                    {blogPosts
+                      .filter((b) => b.slug !== slug)
+                      .map((b) => (
+                        <div key={b.slug} className="mb-6 px-4">
+                          <div className="relative w-full overflow-hidden group rounded-md">
+                            <div className="absolute left-0 bottom-0 z-[1] w-full p-4 bg-[rgba(196,154,108,0.77)] top-[62%] group-hover:top-0 group-hover:p-8 transition-all duration-300">
+                              <Link href={`/${b.slug}`}>
+                                <div className="text-white text-base font-semibold h-[60px] line-clamp-3">{b.title}</div>
+                              </Link>
+                              <div className="mt-3 text-center">
+                                <Link href={`/${b.slug}`} className="btn-dark text-sm px-6 py-1.5">
+                                  Yazıyı Oku
+                                </Link>
+                              </div>
+                            </div>
+                            <img src={b.image} alt={b.title} className="w-full aspect-[4/3] object-cover" loading="lazy" />
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </ScrollReveal>
       )}
     </>
   );

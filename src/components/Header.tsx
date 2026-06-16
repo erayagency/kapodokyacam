@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/data";
@@ -15,6 +15,20 @@ const socialIcons: Record<string, string> = {
 export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  const closeMobile = () => setMobileOpen(false);
 
   return (
     <>
@@ -50,12 +64,16 @@ export default function Header() {
         </div>
       </section>
 
-      <section className="py-2.5 hidden md:block">
+      <section
+        className={`hidden md:block sticky top-0 z-50 bg-white transition-shadow duration-300 ${
+          scrolled ? "shadow-md border-b-2 border-gold" : ""
+        }`}
+      >
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center py-2.5">
             <div className="max-w-[300px]">
               <Link href="/">
-                <img src="/yuklemeler/imaj/logo-1.png" alt={siteConfig.name} className="h-auto max-w-full" />
+                <img src="/yuklemeler/imaj/logo-1.png" alt={siteConfig.name} className="h-auto max-w-full" loading="lazy" />
               </Link>
             </div>
             <nav>
@@ -64,7 +82,7 @@ export default function Header() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`px-2.5 py-[37px] text-[15px] font-semibold hover:opacity-70 ${
+                      className={`px-2.5 py-[37px] text-[15px] font-semibold hover:opacity-70 transition-colors ${
                         pathname === item.href ? "text-gold" : "text-dark"
                       }`}
                     >
@@ -78,10 +96,14 @@ export default function Header() {
         </div>
       </section>
 
-      <section className="flex md:hidden items-center justify-between px-4 py-2.5 border-b-2 border-gold">
+      <section
+        className={`flex md:hidden items-center justify-between px-4 py-2.5 border-b-2 border-gold sticky top-0 z-50 bg-white ${
+          scrolled ? "shadow-md" : ""
+        }`}
+      >
         <div>
           <Link href="/">
-            <img src="/yuklemeler/imaj/logo-1.png" alt={siteConfig.name} className="max-w-[170px]" />
+            <img src="/yuklemeler/imaj/logo-1.png" alt={siteConfig.name} className="max-w-[170px]" loading="lazy" />
           </Link>
         </div>
         <div className="flex items-center gap-4">
@@ -93,7 +115,8 @@ export default function Header() {
           </a>
           <button
             onClick={() => setMobileOpen(true)}
-            className="text-3xl bg-transparent border-none p-0 mx-2.5"
+            className="text-3xl bg-transparent border-none p-0 mx-2.5 cursor-pointer"
+            aria-label="Menüyü Aç"
           >
             <i className="fa-solid fa-bars"></i>
           </button>
@@ -102,11 +125,15 @@ export default function Header() {
 
       {mobileOpen && (
         <>
-          <div className="fixed inset-0 z-[999]">
-            <div className="bg-gold w-[75%] h-full pt-5">
+          <div
+            className="fixed inset-0 bg-black/30 z-[998]"
+            onClick={closeMobile}
+          />
+          <div className="fixed inset-y-0 left-0 z-[999] animate-[fadeInLeft_0.5s_ease]">
+            <div className="bg-gold w-[75%] h-full pt-5 overflow-y-auto">
               <div className="flex justify-around px-5 mb-5">
                 <div className="text-center">
-                  <Link href="/" className="text-white text-sm font-semibold" onClick={() => setMobileOpen(false)}>
+                  <Link href="/" className="text-white text-sm font-semibold" onClick={closeMobile}>
                     <i className="fas fa-home block text-3xl mb-2.5"></i>
                     Ana Sayfa
                   </Link>
@@ -121,7 +148,7 @@ export default function Header() {
               <Link
                 href="/iletisim"
                 className="block leading-10 text-white bg-dark text-center rounded mx-5 mb-2.5"
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMobile}
               >
                 Bize Ulaşın
               </Link>
@@ -143,8 +170,10 @@ export default function Header() {
                     <li key={item.href} className="px-6 py-2.5">
                       <Link
                         href={item.href}
-                        className="text-white font-semibold text-sm"
-                        onClick={() => setMobileOpen(false)}
+                        className={`text-white font-semibold text-sm ${
+                          pathname === item.href ? "opacity-100 underline" : "opacity-90"
+                        }`}
+                        onClick={closeMobile}
                       >
                         {item.label}
                       </Link>
@@ -154,9 +183,13 @@ export default function Header() {
               </nav>
             </div>
           </div>
-          <div className="fixed top-[18px] right-5 z-[9999]" onClick={() => setMobileOpen(false)}>
-            <i className="fa-solid fa-times text-white text-2xl cursor-pointer"></i>
-          </div>
+          <button
+            onClick={closeMobile}
+            className="fixed top-[18px] right-5 z-[9999] bg-transparent border-none cursor-pointer"
+            aria-label="Menüyü Kapat"
+          >
+            <i className="fa-solid fa-times text-white text-2xl"></i>
+          </button>
         </>
       )}
     </>

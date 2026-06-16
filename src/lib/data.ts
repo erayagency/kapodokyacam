@@ -69,7 +69,7 @@ export const siteConfig = {
       url: "/yuklemeler/pdf/kapadokya-cam-yeni-gfb-15-08-2020_4.pdf",
     },
   ],
-  reCaptchaSiteKey: "6Lee77kbAAAAAG0vZJxhlDw5kl8s9vVFH1SBp1pc",
+  formAction: "https://formspree.io/f/your-form-id",
 };
 
 export const services: Service[] = [

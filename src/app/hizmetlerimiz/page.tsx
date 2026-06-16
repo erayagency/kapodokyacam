@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
+import ScrollReveal from "@/components/ScrollReveal";
 import { services } from "@/lib/data";
 import { ServiceCard } from "@/components/ServiceCard";
 
@@ -18,15 +19,17 @@ export default function Hizmetlerimiz() {
           { label: "Hizmetlerimiz" },
         ]}
       />
-      <section className="py-[70px]">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {services.map((service) => (
-              <ServiceCard key={service.slug} service={service} />
-            ))}
+      <ScrollReveal>
+        <section className="py-[70px]">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {services.map((service) => (
+                <ServiceCard key={service.slug} service={service} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
     </>
   );
 }

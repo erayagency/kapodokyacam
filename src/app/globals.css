@@ -13,19 +13,9 @@ body {
   color: #231f20;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  list-style: none;
-}
+a { text-decoration: none; color: inherit; }
+ul { margin: 0; padding: 0; }
+li { list-style: none; }
 
 .section-title {
   position: relative;
@@ -54,12 +44,9 @@ li {
   display: inline-block;
   border-radius: 5px;
   font-weight: 500;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
 }
-
-.btn-gold:hover {
-  background-color: #231f20;
-}
+.btn-gold:hover { background-color: #231f20; transform: translateY(-1px); }
 
 .btn-dark {
   background-color: #231f20;
@@ -68,16 +55,53 @@ li {
   display: inline-block;
   border-radius: 5px;
   font-weight: 500;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
 }
+.btn-dark:hover { background-color: #c49a6c; transform: translateY(-1px); }
 
-.btn-dark:hover {
+/* Swiper nav ok stilleri */
+.slider-owl-2 .swiper-button-prev,
+.slider-owl-2 .swiper-button-next {
+  width: 44px;
+  height: 44px;
+  margin-top: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #c49a6c;
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 9px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color .3s;
+}
+.slider-owl-2 .swiper-button-prev:hover,
+.slider-owl-2 .swiper-button-next:hover { background-color: #231f20; }
+.slider-owl-2 .swiper-button-prev::after,
+.slider-owl-2 .swiper-button-next::after { content: none; }
+.slider-owl-2 .swiper-button-prev .swiper-navigation-icon,
+.slider-owl-2 .swiper-button-next .swiper-navigation-icon { display: none; }
+.slider-owl-2 .swiper-button-prev i,
+.slider-owl-2 .swiper-button-next i { font-size: 18px; line-height: 1; }
+.slider-owl-2 .swiper-button-prev { left: 10px; }
+.slider-owl-2 .swiper-button-next { right: 10px; }
+
+/* Swiper slide width fix */
+.swiper .swiper-slide.col {
+  flex: 0 0 auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 @media (max-width: 900px) {
-  .section-title {
-    font-size: 22px;
-    margin-bottom: 30px;
-  }
+  .section-title { font-size: 22px; margin-bottom: 30px; }
+}
+
+/* fadeInLeft animasyonu (mobil menü için) */
+@keyframes fadeInLeft {
+  0% { opacity: 0; transform: translate3d(-100%,0,0); }
+  to { opacity: 1; transform: translateZ(0); }
 }

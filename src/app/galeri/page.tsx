@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
+import ScrollReveal from "@/components/ScrollReveal";
+import Lightbox from "@/components/Lightbox";
 import { galleryItems } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -8,6 +10,11 @@ export const metadata: Metadata = {
 };
 
 export default function Galeri() {
+  const images = galleryItems.map((item) => ({
+    src: item.image.replace("/default/", "/"),
+    alt: item.alt,
+  }));
+
   return (
     <>
       <Breadcrumb
@@ -19,15 +26,9 @@ export default function Galeri() {
       />
       <section className="py-[70px]">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {galleryItems.map((item, i) => (
-              <div key={i} className="p-2.5 bg-white rounded-md shadow-md text-center">
-                <a href={item.image} target="_blank" rel="noopener noreferrer">
-                  <img src={item.image} alt={item.alt} className="w-full rounded" />
-                </a>
-              </div>
-            ))}
-          </div>
+          <ScrollReveal>
+            <Lightbox images={images} />
+          </ScrollReveal>
         </div>
       </section>
     </>

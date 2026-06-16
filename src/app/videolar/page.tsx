@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
+import ScrollReveal from "@/components/ScrollReveal";
 import { videos } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -17,29 +18,31 @@ export default function Videolar() {
           { label: "Videolar" },
         ]}
       />
-      <section className="py-[70px] bg-[#efefef]">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {videos.map((video, i) => (
-              <a
-                key={i}
-                href={video.youtubeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-md shadow-md overflow-hidden bg-white h-full"
-              >
-                <div className="relative">
-                  <img src={video.thumbnail} alt={video.title} className="w-full" />
-                  <div className="absolute inset-0 flex items-center justify-center text-4xl text-white bg-[rgba(0,0,0,0.05)]">
-                    <i className="fas fa-play shadow-lg"></i>
+      <ScrollReveal>
+        <section className="py-[70px] bg-[#efefef]">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {videos.map((video, i) => (
+                <a
+                  key={i}
+                  href={video.youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-md shadow-md overflow-hidden bg-white h-full hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group"
+                >
+                  <div className="relative">
+                    <img src={video.thumbnail} alt={video.title} className="w-full aspect-video object-cover" loading="lazy" />
+                    <div className="absolute inset-0 flex items-center justify-center text-5xl text-white bg-[rgba(0,0,0,0.05)] group-hover:bg-[rgba(0,0,0,0.2)] transition-colors">
+                      <i className="fas fa-play-circle drop-shadow-lg group-hover:scale-110 transition-transform"></i>
+                    </div>
                   </div>
-                </div>
-                <div className="p-2.5 font-semibold text-dark flex items-center">{video.title}</div>
-              </a>
-            ))}
+                  <div className="p-3 font-semibold text-dark flex items-center group-hover:text-gold transition-colors">{video.title}</div>
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
     </>
   );
 }
