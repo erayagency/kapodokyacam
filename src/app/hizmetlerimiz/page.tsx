@@ -34,7 +34,7 @@ export default function Hizmetlerimiz() {
         }}
       />
       <ScrollReveal>
-        <section className="py-[70px]">
+        <section className="py-8 md:py-[70px]">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {services.map((service) => (

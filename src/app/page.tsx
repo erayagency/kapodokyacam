@@ -30,7 +30,7 @@ export default function Home() {
       </section>
 
       <ScrollReveal>
-        <section className="py-[70px]">
+        <section className="py-8 md:py-[70px]">
           <div className="container mx-auto px-4">
             <h2 className="section-title">Hakkımızda</h2>
             <div className="flex flex-col md:flex-row items-center gap-8">
@@ -57,7 +57,7 @@ export default function Home() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="py-[70px] bg-[#f7f7f7]">
+        <section className="py-8 md:py-[70px] bg-[#f7f7f7]">
           <div className="container mx-auto px-4">
             <h2 className="section-title">Toplama Ayırma Lisansı İle Yaptıklarımız</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -78,7 +78,7 @@ export default function Home() {
 
       <ScrollReveal>
         <section
-          className="py-20 text-center text-white bg-cover bg-center bg-scroll md:bg-fixed"
+          className="py-12 md:py-20 text-center text-white bg-cover bg-center bg-scroll md:bg-fixed"
           style={{
             backgroundImage:
               "linear-gradient(rgba(49,46,46,0.65),rgba(9,20,12,0.51)), url(/images/cta-bg.png)",
@@ -101,7 +101,7 @@ export default function Home() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="py-[70px]">
+        <section className="py-8 md:py-[70px]">
           <div className="container mx-auto px-4">
             <h2 className="section-title">Blog Yazıları</h2>
             <SwiperClient
@@ -126,7 +126,7 @@ export default function Home() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="py-[70px] bg-[#efefef]">
+        <section className="py-8 md:py-[70px] bg-[#efefef]">
           <div className="container mx-auto px-4">
             <SwiperClient
               className="video-slider"

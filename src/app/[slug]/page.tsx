@@ -66,13 +66,13 @@ export default async function ContentPage({ params }: Props) {
 
       {isService ? (
         <ScrollReveal>
-          <section className="py-[70px]">
+          <section className="py-8 md:py-[70px]">
             <div className="container mx-auto px-4">
               <div className="mb-8">
                 <img
                   src={detailImage}
                   alt={page.title}
-                  className="float-right max-w-[400px] w-full ml-0 md:ml-6 mb-6 rounded shadow-md"
+                  className="float-none md:float-right max-w-full md:max-w-[400px] w-full md:ml-6 mb-6 rounded shadow-md"
                   loading="lazy"
                 />
               </div>
@@ -109,7 +109,7 @@ export default async function ContentPage({ params }: Props) {
         </ScrollReveal>
       ) : (
         <ScrollReveal>
-          <section className="py-[70px]">
+          <section className="py-8 md:py-[70px]">
             <div className="container mx-auto px-4">
               <div className="flex flex-col md:flex-row gap-8">
                 <div className="md:w-2/3">

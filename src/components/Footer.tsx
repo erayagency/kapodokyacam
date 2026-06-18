@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="pt-[70px] pb-[70px] md:pb-[70px] pb-[100px] bg-gold">
+      <footer className="pt-12 md:pt-[70px] pb-20 md:pb-[70px] bg-gold">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-center items-center text-white">
             <div className="md:w-1/2 flex flex-col md:flex-row justify-center items-center border-0 md:border-r md:border-white mb-5 md:mb-0">

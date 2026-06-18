@@ -14,7 +14,7 @@ export default function Breadcrumb({ title, items }: BreadcrumbProps) {
       }}
     >
       <div className="container mx-auto px-4">
-        <h1 className="text-[28px] font-semibold mb-5">{title}</h1>
+        <h1 className="text-xl md:text-[28px] font-semibold mb-5">{title}</h1>
         <ul className="flex justify-center text-white">
           {items.map((item, i) => (
             <li key={i} className="flex items-center">

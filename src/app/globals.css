@@ -20,10 +20,17 @@ li { list-style: none; }
 .section-title {
   position: relative;
   text-align: center;
-  font-size: 27px;
+  font-size: 22px;
   font-weight: 600;
   color: #231f20;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 901px) {
+  .section-title {
+    font-size: 27px;
+    margin-bottom: 50px;
+  }
 }
 
 .section-title::after {
@@ -40,30 +47,38 @@ li { list-style: none; }
 .btn-gold {
   background-color: #c49a6c;
   color: white;
-  padding: 10px 40px;
+  padding: 8px 30px;
   display: inline-block;
   border-radius: 5px;
   font-weight: 500;
+  font-size: 14px;
   transition: background-color 0.3s, transform 0.2s;
+}
+@media (min-width: 901px) {
+  .btn-gold { padding: 10px 40px; font-size: 16px; }
 }
 .btn-gold:hover { background-color: #231f20; transform: translateY(-1px); }
 
 .btn-dark {
   background-color: #231f20;
   color: white;
-  padding: 10px 40px;
+  padding: 8px 30px;
   display: inline-block;
   border-radius: 5px;
   font-weight: 500;
+  font-size: 14px;
   transition: background-color 0.3s, transform 0.2s;
+}
+@media (min-width: 901px) {
+  .btn-dark { padding: 10px 40px; font-size: 16px; }
 }
 .btn-dark:hover { background-color: #c49a6c; transform: translateY(-1px); }
 
 /* Swiper nav ok stilleri */
 .slider-owl-2 .swiper-button-prev,
 .slider-owl-2 .swiper-button-next {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   margin-top: 0;
   top: 50%;
   transform: translateY(-50%);
@@ -78,6 +93,10 @@ li { list-style: none; }
   z-index: 10;
   transition: background-color .3s;
 }
+@media (min-width: 901px) {
+  .slider-owl-2 .swiper-button-prev,
+  .slider-owl-2 .swiper-button-next { width: 44px; height: 44px; }
+}
 .slider-owl-2 .swiper-button-prev:hover,
 .slider-owl-2 .swiper-button-next:hover { background-color: #231f20; }
 .slider-owl-2 .swiper-button-prev::after,
@@ -85,9 +104,17 @@ li { list-style: none; }
 .slider-owl-2 .swiper-button-prev .swiper-navigation-icon,
 .slider-owl-2 .swiper-button-next .swiper-navigation-icon { display: none; }
 .slider-owl-2 .swiper-button-prev i,
-.slider-owl-2 .swiper-button-next i { font-size: 18px; line-height: 1; }
-.slider-owl-2 .swiper-button-prev { left: 10px; }
-.slider-owl-2 .swiper-button-next { right: 10px; }
+.slider-owl-2 .swiper-button-next i { font-size: 14px; line-height: 1; }
+@media (min-width: 901px) {
+  .slider-owl-2 .swiper-button-prev i,
+  .slider-owl-2 .swiper-button-next i { font-size: 18px; }
+}
+.slider-owl-2 .swiper-button-prev { left: 5px; }
+.slider-owl-2 .swiper-button-next { right: 5px; }
+@media (min-width: 901px) {
+  .slider-owl-2 .swiper-button-prev { left: 10px; }
+  .slider-owl-2 .swiper-button-next { right: 10px; }
+}
 
 /* Swiper slide width fix */
 .swiper .swiper-slide.col {
@@ -96,12 +123,10 @@ li { list-style: none; }
   padding-right: 0;
 }
 
-@media (max-width: 900px) {
-  .section-title { font-size: 22px; margin-bottom: 30px; }
-}
-
 /* fadeInLeft animasyonu (mobil menü için) */
 @keyframes fadeInLeft {
   0% { opacity: 0; transform: translate3d(-100%,0,0); }
   to { opacity: 1; transform: translateZ(0); }
 }
+
+

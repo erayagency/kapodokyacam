@@ -38,7 +38,7 @@ export default function Galeri() {
           }),
         }}
       />
-      <section className="py-[70px]">
+      <section className="py-8 md:py-[70px]">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <Lightbox images={images} />

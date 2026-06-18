@@ -32,7 +32,7 @@ export default function CerezPolitikasi() {
         }}
       />
       <ScrollReveal>
-        <section className="py-[70px]">
+        <section className="py-8 md:py-[70px]">
           <div className="container mx-auto px-4 prose max-w-none">
             <h2 className="text-2xl font-semibold text-dark mb-6">Çerez Politikası</h2>
 

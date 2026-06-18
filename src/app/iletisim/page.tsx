@@ -33,7 +33,7 @@ export default function Iletisim() {
         }}
       />
       <ScrollReveal>
-        <section className="pt-[70px]">
+        <section className="pt-8 md:pt-[70px]">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row gap-8">
               <div className="md:w-1/2">
@@ -85,7 +85,7 @@ export default function Iletisim() {
 
                   <div className="g-recaptcha mb-4" data-sitekey={siteConfig.reCaptchaSiteKey}></div>
 
-                  <button type="submit" className="bg-gold rounded-md text-white border-none py-2.5 px-[50px] font-bold text-lg hover:bg-dark transition-colors cursor-pointer">Gönder</button>
+                  <button type="submit" className="w-full md:w-auto bg-gold rounded-md text-white border-none py-2.5 px-[50px] font-bold text-lg hover:bg-dark transition-colors cursor-pointer">Gönder</button>
                 </form>
               </div>
             </div>
